@@ -7,7 +7,8 @@ public class TankMovement : MonoBehaviour
     public float speed = 10.0f;
     public GameObject fuel;
     public float rotationSpeed = 100.0f;
-    private bool isrotating;
+    private bool autopilot;
+    public float autoRotatingSpeed = 3f;
 
     void Update()
     {
@@ -26,16 +27,27 @@ public class TankMovement : MonoBehaviour
         //Calculates the distance and angle from the fuel and starts to rotate towards it
         if(Input.GetKeyDown(KeyCode.Space)){
             CalculateDistance();
-            CalculateAngle();
-            isrotating = true;
+            InstantlyRotateTowards();
         }
-        if(isrotating){
-            CalculateAngle();
+        if(Input.GetKeyDown(KeyCode.T)){
+            autopilot = !autopilot;
+        }
+
+        if(CalculateDistance() < 2){
+            autopilot = false;
+        }
+        if(autopilot){
+            autoPilot();
+            RotateAndCalculateAngle();
         }
 
     }
 
-    private void CalculateDistance(){
+    private void autoPilot(){
+        transform.position += transform.up * speed * Time.deltaTime;
+    }
+
+    private float CalculateDistance(){
         //Mathematical way:
         // float distance = Mathf.Sqrt(Mathf.Pow(fuel.transform.position.x - transform.position.x,2)+Mathf.Pow(fuel.transform.position.y - transform.position.y,2));
 
@@ -43,12 +55,11 @@ public class TankMovement : MonoBehaviour
         // float distance = (fuel.transform.position-transform.position).magnitude;
 
         //Unity methods way
-        float distance = Vector3.Distance(fuel.transform.position, transform.position);
+        return Vector3.Distance(fuel.transform.position, transform.position);
 
-        Debug.Log("Distance: " + distance);
     }
 
-    private void CalculateAngle(){
+    private void RotateAndCalculateAngle(){
         Vector3 tankforward = transform.up; //Up because its a fake 2D in a 3D project
         Vector3 fueldirection = fuel.transform.position - transform.position;
 
@@ -65,14 +76,25 @@ public class TankMovement : MonoBehaviour
         Debug.Log("Math Angle: "+ mathAngle * Mathf.Rad2Deg);
         Debug.Log("Unity Angle: " + uAngle);
 
-        Vector3 crossProduct = UnityCrosProduct(tankforward, fueldirection);
-        transform.Rotate(0,0,crossProduct.z);
-        if(uAngle == 0){
-            isrotating = false;
+        //Rotate over time in the mathematical way with the UnityCrossProduct plus my personal touch to avoid rotating stuck on small values
+        if(uAngle * Mathf.Rad2Deg < 3 && uAngle * Mathf.Rad2Deg != 0){
+            InstantlyRotateTowards();
+            return;
         }
+        Vector3 crossProduct = UnityCrossProduct(tankforward, fueldirection);
+        transform.Rotate(0,0,crossProduct.z * autoRotatingSpeed * Time.deltaTime);
+
     }
 
-    private Vector3 UnityCrosProduct(Vector3 v, Vector3 w){
+    private void InstantlyRotateTowards(){
+        //Rotate instantly using quaternions
+        Vector3 fueldirection = fuel.transform.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, fueldirection);
+        transform.rotation = targetRotation;
+    }
+    
+    
+    private Vector3 UnityCrossProduct(Vector3 v, Vector3 w){
         Vector3 crossProduct = Vector3.Cross(v, w); 
         return crossProduct;
     }
