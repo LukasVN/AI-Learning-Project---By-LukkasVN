@@ -21,7 +21,7 @@ public class FireShell : MonoBehaviour {
             Vector3 aimAt = CalculateTrajectory();
             if (aimAt != Vector3.zero) {
 
-                this.transform.forward = CalculateTrajectory();
+                transform.forward = CalculateTrajectory();
                 CreateBullet();
             }
         }
