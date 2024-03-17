@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2887154942990734001}
   - component: {fileID: 7188566368376424555}
+  - component: {fileID: 2217012384251042095}
   m_Layer: 0
   m_Name: Tank
   m_TagString: tank
@@ -54,6 +55,53 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.66, y: 2, z: 2.72}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2217012384251042095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182668876329722018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbbbd88255f7c954a9c8af7b54758bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 9162047389006064978, guid: dd29e4856e343d14886aeb97cdbd6332, type: 3}
+  turret: {fileID: 2261873853866379798}
+  enemy: {fileID: 0}
+  turretBase: {fileID: 6880403096463785013}
+--- !u!1 &2261873853866379798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9206139483201227875}
+  m_Layer: 0
+  m_Name: Turret
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9206139483201227875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261873853866379798}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.1323083, y: -0, z: -0, w: 0.9912086}
+  m_LocalPosition: {x: -0, y: 1.82, z: 1.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6880403096463785013}
+  m_LocalEulerAnglesHint: {x: -15.206, y: 90, z: 0}
 --- !u!1 &3560058171350417492
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +420,8 @@ Transform:
   m_LocalPosition: {x: 0.000010554959, y: 1.0796412, z: -0.025321364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9206139483201227875}
   m_Father: {fileID: 6938391260596658440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8793404300833214937

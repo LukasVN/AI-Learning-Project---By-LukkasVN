@@ -15,7 +15,7 @@ public class Shell : MonoBehaviour
     {
         if (col.gameObject.tag == "tank")
         {
-            GameObject exp = Instantiate(explosion, this.transform.position, Quaternion.identity);
+            GameObject exp = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(exp, 0.5f);
             Destroy(gameObject);
         }

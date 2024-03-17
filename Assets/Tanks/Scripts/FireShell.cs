@@ -7,51 +7,107 @@ public class FireShell : MonoBehaviour {
     public GameObject bullet;
     public GameObject turret;
     public GameObject enemy;
+    public Transform turretBase;
+    private float speed = 15f;
+    private float rotationSpeed = 3.5f;
+    float moveSpeed = 1f;
+    private float attackCooldown = 0.5f;
 
     void CreateBullet() {
 
-        Instantiate(bullet, turret.transform.position, turret.transform.rotation);
+        GameObject shell = Instantiate(bullet, turret.transform.position, turret.transform.rotation);
+        shell.GetComponent<Rigidbody>().velocity = speed * turretBase.forward;
+    }
+
+    float? RotateTurret(){
+        float? angle = CalculateAngle(false);
+        if(angle != null){
+            turretBase.localEulerAngles = new Vector3(360f - (float)angle,0f,0f);
+        }
+        return angle;
+    }
+
+    private float? CalculateAngle(bool low){
+        Vector3 targetDir = enemy.transform.position - transform.position;
+        float y = targetDir.y;
+        targetDir.y = 0f;
+        float x = targetDir.magnitude - 1;
+        float gravity = 9.8f;
+        float sSqr = speed * speed;
+        float underTheSqrRoot = (sSqr * sSqr) - gravity * (gravity * x * x + 2 * y * sSqr);
+        if(underTheSqrRoot >= 0f){
+            float root = Mathf.Sqrt(underTheSqrRoot);
+            float highAngle = sSqr + root;
+            float lowAngle = sSqr - root;
+
+            if(low){
+                return Mathf.Atan2(lowAngle, gravity *x) * Mathf.Rad2Deg;
+            }
+            else{
+                return Mathf.Atan2(highAngle, gravity *x) * Mathf.Rad2Deg;
+            }
+
+        }else{
+            return null;
+        }
     }
 
     void Update() {
-
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-
-            Vector3 aimAt = CalculateTrajectory();
-            if (aimAt != Vector3.zero) {
-
-                transform.forward = CalculateTrajectory();
-                CreateBullet();
-            }
+        Vector3 direction = (enemy.transform.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        float? angle = RotateTurret();
+        attackCooldown -= Time.deltaTime;
+        if (angle != null && attackCooldown <= 0) {
+            CreateBullet();
+            attackCooldown = 0.5f;
         }
+        else if(angle == null){
+            transform.Translate(0,0,Time.deltaTime * moveSpeed);
+        }
+
     }
 
-    Vector3 CalculateTrajectory() {
+    // private void Update() {
+        // if(Input.GetKeyDown(KeyCode.Space)){
+            // Vector3 aimAt = CalculateTrajectory();
+            // if (aimAt != Vector3.zero) {
 
-        Vector3 p = enemy.transform.position - this.transform.position;
-        Vector3 v = enemy.transform.forward * enemy.GetComponent<Drive>().speed;
-        float s = bullet.GetComponent<MoveShell>().speed;
+            //     transform.forward = CalculateTrajectory();
+            //     CreateBullet();
+            // }
+            // CreateBullet();
+        // }
+    // }
 
-        float a = Vector3.Dot(v, v) - s * s;
-        float b = Vector3.Dot(p, v);
-        float c = Vector3.Dot(p, p);
-        float d = b * b - a * c;
+    // Vector3 CalculateTrajectory() {
 
-        if (d < 0.1f) return Vector3.zero;
+    //     Vector3 p = enemy.transform.position - transform.position;
+    //     Vector3 v = enemy.transform.forward * enemy.GetComponent<Drive>().speed;
+    //     float s = bullet.GetComponent<MoveShell>().speed;
 
-        float sqrt = Mathf.Sqrt(d);
-        float t1 = (-b - sqrt) / c;
-        float t2 = (-b + sqrt) / c;
+    //     float a = Vector3.Dot(v, v) - s * s;
+    //     float b = Vector3.Dot(p, v);
+    //     float c = Vector3.Dot(p, p);
+    //     float d = b * b - a * c;
 
-        float t = 0.0f;
-        if (t1 < 0.0f && t2 < 0.0f) return Vector3.zero;
-        else if (t1 < 0.0f) t = t2;
-        else if (t2 < 0.0f) t = t1;
-        else {
+    //     if (d < 0.1f) return Vector3.zero;
 
-            t = Mathf.Max(new float[] { t1, t2 });
-        }
-        return t * p + v;
-    }
+    //     float sqrt = Mathf.Sqrt(d);
+    //     float t1 = (-b - sqrt) / c;
+    //     float t2 = (-b + sqrt) / c;
+
+    //     float t = 0.0f;
+    //     if (t1 < 0.0f && t2 < 0.0f) return Vector3.zero;
+    //     else if (t1 < 0.0f) t = t2;
+    //     else if (t2 < 0.0f) t = t1;
+    //     else {
+
+    //         t = Mathf.Max(new float[] { t1, t2 });
+    //     }
+    //     return t * p + v;
+    // }
+
+
+
 }
