@@ -61,7 +61,7 @@ public class FindPathStar : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.C) && !done){ //Makes a move to the Maplocation wit hthe lowest F value.
             Search(lastPosition);
         }
-        else if(Input.GetKeyDown(KeyCode.M) && done){ //Once the path is found deletes all other ones except the one that reached the goal first.
+        else if(Input.GetKeyDown(KeyCode.M)){ //Once the path is found deletes all other ones except the one that reached the goal first.
             GetPath();
         }
     }
