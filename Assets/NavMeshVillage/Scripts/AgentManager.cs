@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AgentManager : MonoBehaviour
 {
-    private GameObject[] agents;
+    List<NavMeshAgent> agentList = new List<NavMeshAgent>();
     void Start()
     {
-        agents = GameObject.FindGameObjectsWithTag("AI");
+        GameObject[] a = GameObject.FindGameObjectsWithTag("AI");
+        foreach (GameObject go in a){
+            agentList.Add(go.GetComponent<NavMeshAgent>());
+        }
     }
 
     void Update()
@@ -15,8 +19,9 @@ public class AgentManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             RaycastHit hit;
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)){
-                foreach (GameObject ag in agents){
-                    ag.GetComponent<AIController>().agent.SetDestination(hit.point);
+                foreach (NavMeshAgent navAgent in agentList)
+                {
+                    navAgent.SetDestination(hit.point);
                 }
             }
         }
