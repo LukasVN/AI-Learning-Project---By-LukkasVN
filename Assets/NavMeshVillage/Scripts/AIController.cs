@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
     private Animator anim;
 
     void Start()

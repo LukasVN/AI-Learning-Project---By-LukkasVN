@@ -11,9 +11,9 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
+  - name: Rock
     cost: 1
-  - name: 
+  - name: BigRock
     cost: 1
   - name: 
     cost: 1
