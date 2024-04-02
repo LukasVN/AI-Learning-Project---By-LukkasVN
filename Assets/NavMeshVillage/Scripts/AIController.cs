@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AIController : MonoBehaviour
 {
-    
+    public GameObject target;
     private NavMeshAgent agent;
     private Animator anim;
 
@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        agent.SetDestination(target.transform.position);
         if(agent.remainingDistance < 2){
             anim.SetBool("isMoving", false);
         }

@@ -2342,6 +2342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &384393299
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2356,7 +2357,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 100
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3620,6 +3621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &598781930
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3634,7 +3636,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -5937,6 +5939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &860002752
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5951,7 +5954,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -7586,6 +7589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &1106235349
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7600,7 +7604,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -10559,6 +10563,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1577109366}
   m_LocalEulerAnglesHint: {x: 0, y: -133.85101, z: 0}
+--- !u!1001 &1401405620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1856188514370210, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_Name
+      value: CombatJane
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 48.2529
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.391255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.00359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580229927943822, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+--- !u!1 &1401405621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1856188514370210, guid: 2d70c42586e2a4993ab0c98d4f4658cc, type: 3}
+  m_PrefabInstance: {fileID: 1401405620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1405190040
 Transform:
   m_ObjectHideFlags: 0
@@ -10694,6 +10760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &1419379552
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10708,7 +10775,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -10733,6 +10800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &1449220001
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10747,7 +10815,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -12667,6 +12735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &1761737964
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12681,7 +12750,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -14316,6 +14385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54244617036e2b4cbc68f81f5a89d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1401405621}
 --- !u!195 &2058917883
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -14330,7 +14400,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -15244,3 +15314,4 @@ SceneRoots:
   - {fileID: 384393296}
   - {fileID: 1001316087}
   - {fileID: 1830752210}
+  - {fileID: 1401405620}
