@@ -2549,7 +2549,7 @@ GameObject:
   - component: {fileID: 6543875868261396435}
   - component: {fileID: 3213974881288822173}
   m_Layer: 0
-  m_Name: Ugg
+  m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

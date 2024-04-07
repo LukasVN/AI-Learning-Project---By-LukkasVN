@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public sealed class GameEnvironment : MonoBehaviour
+public sealed class GameEnvironment
 {
     private static GameEnvironment instance;
     private List<GameObject> checkpoints = new List<GameObject>();
@@ -19,19 +19,5 @@ public sealed class GameEnvironment : MonoBehaviour
             }
             return instance;
         }
-    }
-    private void Awake() {
-        instance = this;
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
