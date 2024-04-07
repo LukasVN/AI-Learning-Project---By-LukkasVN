@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class State
 {
     public enum STATE{
-        IDLE, PATROL, PURSUE, ATTACK, SLEEP
+        IDLE, PATROL, PURSUE, ATTACK, SLEEP, RUNAWAY
     };
 
     public enum EVENT{
@@ -24,6 +24,7 @@ public class State
 
     float visionDistance = 10f;
     float visionAngle = 30f;
+    float behindDistance = 2f;
     float shootDistance = 7f;
 
     public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player){
@@ -61,6 +62,16 @@ public class State
     public bool CanAttackPlayer(){
         Vector3 direction = player.position - npc.transform.position;
         if(direction.magnitude < shootDistance){
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerBehind(){
+        Vector3 direction = npc.transform.position - player.position;
+        float angle = Vector3.Angle(direction, npc.transform.forward);
+
+        if(direction.magnitude < behindDistance && angle < visionAngle){
             return true;
         }
         return false;

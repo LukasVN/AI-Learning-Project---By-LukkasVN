@@ -36,6 +36,11 @@ public class Patrol : State{
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentIndex].transform.position);
         }
 
+        if(IsPlayerBehind()){
+            nextState = new RunAway(npc, agent, anim, player);
+            stage = EVENT.EXIT;
+        }
+
         if(CanSeePlayer()){
             nextState = new Pursue(npc, agent, anim, player);
             stage = EVENT.EXIT;
