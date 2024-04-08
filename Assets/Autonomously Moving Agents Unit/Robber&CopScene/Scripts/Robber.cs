@@ -88,6 +88,25 @@ public class Robber : MonoBehaviour
         Seek(targetWorld);
     }
 
+    private void Hide(){
+        float distance = Mathf.Infinity;
+        Vector3 chosenSpot = Vector3.zero;
+        float hideDistance = 20;
+
+        for (int i = 0; i < World.Instance.GetHidingSpots().Length; i++){
+            Vector3 hideDirection = World.Instance.GetHidingSpots()[i].transform.position - target.transform.position;
+            Vector3 hidePosition = World.Instance.GetHidingSpots()[i].transform.position + hideDirection.normalized * hideDistance;
+
+            if(Vector3.Distance(transform.position, hidePosition) < distance){
+                chosenSpot = hidePosition;
+                distance = Vector3.Distance(transform.position, hidePosition);
+            }
+        }
+
+        Seek(chosenSpot);
+        //agent.SetDestination(chosenSpot);
+    }
+    
     void Update()
     {
         switch (movementType)
@@ -110,7 +129,7 @@ public class Robber : MonoBehaviour
                 Wander();
             break;
             case MovementType.Hide:
-                Evade();
+                Hide();
             break;
 
         }
