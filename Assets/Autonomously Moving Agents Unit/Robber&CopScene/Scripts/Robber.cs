@@ -21,10 +21,72 @@ public class Robber : MonoBehaviour
         ComplexBehaviour,
     }
     public MovementType movementType;
+    private bool isComplexBehaviour = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         moveScript = target.GetComponent<Move>();
+        if(movementType == MovementType.ComplexBehaviour){
+            isComplexBehaviour = true;
+        }
+    }
+
+    void Update()
+    {
+        switch (movementType)
+        {
+            case MovementType.Seek: 
+                Seek(target.transform.position);           
+            break;
+
+            case MovementType.Flee:
+                Flee(target.transform.position);
+            break;
+
+            case MovementType.Pursue:
+                Pursue();
+            break;
+
+            case MovementType.Evade:
+                Evade();
+            break;
+
+            case MovementType.Wander:
+                if(isComplexBehaviour && Vector3.Distance(target.transform.position,transform.position) < 10){
+                    movementType = MovementType.ComplexBehaviour;
+                }else{
+                    Wander();
+                }
+            break;
+
+            case MovementType.Hide:
+                Hide();
+            break;
+
+            case MovementType.CleverHide:
+            if(CanSeeCop()){
+                CleverHide();
+            }
+            break;
+
+            case MovementType.ComplexBehaviour:
+            if(Vector3.Distance(target.transform.position,transform.position) > 10){
+                movementType = MovementType.Wander;
+                return;
+            }
+            if(!coolDown){
+                if(CanSeeCop() && CopIsLooking()){
+                    CleverHide();
+                    coolDown = true;
+                    Invoke("BehaviourCoolDown", 5f);
+                } else{
+                    Pursue();
+                }
+            }
+            break;
+
+        }
+        
     }
 
     private void Seek(Vector3 location){
@@ -176,55 +238,7 @@ public class Robber : MonoBehaviour
     private void BehaviourCoolDown(){
         coolDown = false;
     }
-    void Update()
-    {
-        switch (movementType)
-        {
-            case MovementType.Seek: 
-                Seek(target.transform.position);           
-            break;
-
-            case MovementType.Flee:
-                Flee(target.transform.position);
-            break;
-
-            case MovementType.Pursue:
-                Pursue();
-            break;
-
-            case MovementType.Evade:
-                Evade();
-            break;
-
-            case MovementType.Wander:
-                Wander();
-            break;
-
-            case MovementType.Hide:
-                Hide();
-            break;
-
-            case MovementType.CleverHide:
-            if(CanSeeCop()){
-                CleverHide();
-            }
-            break;
-
-            case MovementType.ComplexBehaviour:
-            if(!coolDown){
-                if(CanSeeCop() && CopIsLooking()){
-                    CleverHide();
-                    coolDown = true;
-                    Invoke("BehaviourCoolDown", 5f);
-                } else{
-                    Pursue();
-                }
-            }
-            break;
-
-        }
-        
-    }
+    
     
     
 }
