@@ -8,6 +8,8 @@ public class Robber : MonoBehaviour
     private NavMeshAgent agent;
     public GameObject target;
     private Move moveScript;
+    private bool coolDown = false;
+
     public enum MovementType{
         Seek,
         Flee,
@@ -16,6 +18,7 @@ public class Robber : MonoBehaviour
         Wander,
         Hide,
         CleverHide,
+        ComplexBehaviour,
     }
     public MovementType movementType;
     void Start()
@@ -137,8 +140,8 @@ public class Robber : MonoBehaviour
 
     }
 
-    private bool CanSeeTarget(){
-        float maxAngle = 70;
+    private bool CanSeeCop(){
+        float maxAngle = 60;
         Vector3 directionToTarget = target.transform.position - transform.position;
         float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
@@ -155,6 +158,23 @@ public class Robber : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private bool CopIsLooking(){
+        float maxAngle = 60;
+        Vector3 directionToTarget = transform.position - target.transform.position;
+        float angleToTarget = Vector3.Angle(target.transform.forward, directionToTarget);
+
+        // Check if the angle to the target is within the allowed range
+        if (angleToTarget <= maxAngle)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void BehaviourCoolDown(){
+        coolDown = false;
     }
     void Update()
     {
@@ -185,8 +205,20 @@ public class Robber : MonoBehaviour
             break;
 
             case MovementType.CleverHide:
-            if(CanSeeTarget()){
+            if(CanSeeCop()){
                 CleverHide();
+            }
+            break;
+
+            case MovementType.ComplexBehaviour:
+            if(!coolDown){
+                if(CanSeeCop() && CopIsLooking()){
+                    CleverHide();
+                    coolDown = true;
+                    Invoke("BehaviourCoolDown", 5f);
+                } else{
+                    Pursue();
+                }
             }
             break;
 
