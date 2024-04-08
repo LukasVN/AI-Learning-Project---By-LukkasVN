@@ -137,6 +137,25 @@ public class Robber : MonoBehaviour
 
     }
 
+    private bool CanSeeTarget(){
+        float maxAngle = 70;
+        Vector3 directionToTarget = target.transform.position - transform.position;
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+        // Check if the angle to the target is within the allowed range
+        if (angleToTarget <= maxAngle)
+        {
+            RaycastHit rayCastInfo;
+            if (Physics.Raycast(transform.position, directionToTarget, out rayCastInfo))
+            {
+                if (rayCastInfo.transform.gameObject.tag == "cop")
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     void Update()
     {
         switch (movementType)
@@ -166,7 +185,9 @@ public class Robber : MonoBehaviour
             break;
 
             case MovementType.CleverHide:
+            if(CanSeeTarget()){
                 CleverHide();
+            }
             break;
 
         }

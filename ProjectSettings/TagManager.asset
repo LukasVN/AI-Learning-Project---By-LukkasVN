@@ -11,6 +11,8 @@ TagManager:
   - Fire
   - Checkpoint
   - safe
+  - hide
+  - cop
   layers:
   - Default
   - TransparentFX
