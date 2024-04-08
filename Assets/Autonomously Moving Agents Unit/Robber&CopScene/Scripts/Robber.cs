@@ -15,6 +15,7 @@ public class Robber : MonoBehaviour
         Evade,
         Wander,
         Hide,
+        CleverHide,
     }
     public MovementType movementType;
     void Start()
@@ -106,7 +107,36 @@ public class Robber : MonoBehaviour
         Seek(chosenSpot);
         //agent.SetDestination(chosenSpot);
     }
-    
+
+    private void CleverHide(){
+        float distance = Mathf.Infinity;
+        Vector3 chosenSpot = Vector3.zero;
+        Vector3 choseDirection = Vector3.zero;
+        GameObject chosenHidingSpot = World.Instance.GetHidingSpots()[0];
+
+        for (int i = 0; i < World.Instance.GetHidingSpots().Length; i++){
+            Vector3 hideDirection = World.Instance.GetHidingSpots()[i].transform.position - target.transform.position;
+            Vector3 hidePosition = World.Instance.GetHidingSpots()[i].transform.position + hideDirection.normalized * 20;
+
+            if(Vector3.Distance(transform.position, hidePosition) < distance){
+                chosenSpot = hidePosition;
+                choseDirection = hideDirection;
+                chosenHidingSpot = World.Instance.GetHidingSpots()[i];
+                distance = Vector3.Distance(transform.position, hidePosition);
+            }
+        }
+
+        Collider hideCollider = chosenHidingSpot.GetComponent<Collider>(); //Not the most optimal way to do it but make it in a fast way for learning purposes
+        Ray backRay = new Ray(chosenSpot, - choseDirection.normalized);
+        RaycastHit hitInfo;
+        float rayDistance = 100f;
+        hideCollider.Raycast(backRay, out hitInfo, rayDistance);
+
+
+        Seek(hitInfo.point + choseDirection.normalized * 5);
+
+    }
+
     void Update()
     {
         switch (movementType)
@@ -122,14 +152,21 @@ public class Robber : MonoBehaviour
             case MovementType.Pursue:
                 Pursue();
             break;
+
             case MovementType.Evade:
                 Evade();
             break;
+
             case MovementType.Wander:
                 Wander();
             break;
+
             case MovementType.Hide:
                 Hide();
+            break;
+
+            case MovementType.CleverHide:
+                CleverHide();
             break;
 
         }
