@@ -13,6 +13,7 @@ TagManager:
   - safe
   - hide
   - cop
+  - goal
   layers:
   - Default
   - TransparentFX
