@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flock : MonoBehaviour
 {
     private float speed;
+    private bool turning = false;
     void Start()
     {
         speed = Random.Range(FlockingManager.instance.minSpeed, FlockingManager.instance.maxSpeed);
@@ -12,7 +13,27 @@ public class Flock : MonoBehaviour
 
     void Update()
     {
-        ApplyRules();
+        Bounds b = new Bounds(FlockingManager.instance.transform.position, FlockingManager.instance.swimLimits * 2);
+
+        if(!b.Contains(transform.position)){
+            turning = true;
+        } else{
+            turning = false;
+        }
+
+        if(turning){
+            Vector3 direction = FlockingManager.instance.transform.position - transform.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 
+                                                    FlockingManager.instance.rotationSpeed * Time.deltaTime);
+        } else{
+            if(Random.Range(0,100) < 10){
+                speed = Random.Range(FlockingManager.instance.minSpeed, FlockingManager.instance.maxSpeed);
+            }
+            if(Random.Range(0,100) < 10){
+                ApplyRules();
+            }
+        }
+        
         transform.Translate(0,0, speed * Time.deltaTime);
     }
 
@@ -42,14 +63,17 @@ public class Flock : MonoBehaviour
         }
 
         if(groupSize > 0){
-            vcentre = vcentre/groupSize;
+            vcentre = vcentre/groupSize + FlockingManager.instance.goalPosition - transform.position;
             speed = gSpeed / groupSize;
+            if(speed > FlockingManager.instance.maxSpeed){
+                speed = FlockingManager.instance.maxSpeed;
+            }
 
             Vector3 direction = (vcentre + vavoid) - transform.position;
             if(direction != Vector3.zero){
                 transform.rotation = Quaternion.Slerp(transform.rotation,
                                                         Quaternion.LookRotation(direction),
-                                                        FlockingManager.instance.rotationDistance * Time.deltaTime);
+                                                        FlockingManager.instance.rotationSpeed * Time.deltaTime);
             }
 
         }

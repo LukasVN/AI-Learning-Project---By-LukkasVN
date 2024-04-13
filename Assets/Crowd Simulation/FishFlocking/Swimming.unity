@@ -250,10 +250,11 @@ MonoBehaviour:
   numFish: 20
   allFish: []
   swimLimits: {x: 5, y: 5, z: 5}
+  goalPosition: {x: 0, y: 0, z: 0}
   minSpeed: 1.2
   maxSpeed: 2.28
   neighbourDistance: 10
-  rotationDistance: 2.6
+  rotationSpeed: 2.07
 --- !u!4 &1128797034
 Transform:
   m_ObjectHideFlags: 0
@@ -384,15 +385,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4181184143497572, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.325664
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4181184143497572, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.541
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4181184143497572, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.289312
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4181184143497572, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
       propertyPath: m_LocalRotation.w
