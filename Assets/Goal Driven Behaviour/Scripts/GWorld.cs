@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class GWorld
-{
-    private static readonly GWorld instance = new GWorld();
-    private static WorldState world;
+namespace GoalDrivenBehaviour{
+    public sealed class GWorld
+    {
+        private static readonly GWorld instance = new GWorld();
+        private static WorldStates world;
 
-    static GWorld(){
-        world = new WorldState();
-    }
+        static GWorld(){
+            world = new WorldStates();
+        }
 
-    private GWorld(){
+        private GWorld(){
 
-    }
+        }
 
-    public static GWorld Instance{
-        get{ return instance;}
-    }
+        public static GWorld Instance{
+            get{ return instance;}
+        }
 
-    public WorldState GetWorld(){
-        return world;
+        public WorldStates GetWorld(){
+            return world;
+        }
     }
 }
