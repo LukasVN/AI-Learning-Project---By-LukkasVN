@@ -10,7 +10,7 @@ namespace GoalDrivenBehaviour{
         public string actionName = "Action";
         public float actionCost = 1.0f;
         public GameObject target;
-        public GameObject targetTag;
+        public string targetTag;
         public float duration = 0;
         public WorldState[] ws_preConditions;
         public WorldState[] ws_afterEffects;
