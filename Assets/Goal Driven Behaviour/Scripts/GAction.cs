@@ -19,7 +19,7 @@ namespace GoalDrivenBehaviour{
         public Dictionary<string, int> preconditions;
         public Dictionary<string, int> aftereffects;
 
-        public WorldState agentBeliefs;
+        public WorldStates agentBeliefs;
 
         public bool running = false;
 
@@ -31,12 +31,12 @@ namespace GoalDrivenBehaviour{
         private void Awake() {
             agent = gameObject.GetComponent<NavMeshAgent>();
 
-            if(preconditions != null){
+            if(ws_preConditions != null){
                 foreach (WorldState ws in ws_preConditions){
                     preconditions.Add(ws.key, ws.value);
                 }
             }
-            if(aftereffects != null){
+            if(ws_afterEffects != null){
                 foreach (WorldState ws in ws_afterEffects){
                     aftereffects.Add(ws.key, ws.value);
                 }
@@ -52,10 +52,9 @@ namespace GoalDrivenBehaviour{
                 if(!conditions.ContainsKey(pair.Key)){
                     return false;
                 }
-                return true;
             }
-
             return true;
+
         }
 
         public abstract bool PrePerform();

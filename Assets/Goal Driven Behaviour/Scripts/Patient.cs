@@ -12,8 +12,4 @@ public class Patient : GAgent
         goals.Add(s1,3);
     }
 
-    void Update()
-    {
-        
-    }
 }

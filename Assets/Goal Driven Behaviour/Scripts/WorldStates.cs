@@ -9,7 +9,7 @@ namespace GoalDrivenBehaviour{
         public string key;
         public int value;
     }
-    public class WorldStates : MonoBehaviour
+    public class WorldStates
     {
         public Dictionary<string, int> states;
 

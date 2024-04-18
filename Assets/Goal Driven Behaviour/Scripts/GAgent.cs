@@ -42,7 +42,7 @@ namespace GoalDrivenBehaviour{
         private void LateUpdate() {
 
             if(currentAction != null && currentAction.running){
-                if(currentAction.agent.hasPath && currentAction.agent.remainingDistance <1f){
+                if(currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1f){
                     if(!invoked){
                         Invoke("CompleteAction", currentAction.duration);
                         invoked = true;
@@ -57,7 +57,7 @@ namespace GoalDrivenBehaviour{
                 var sortedGoals = from entry in goals orderby entry.Value descending select entry;
                 
                 foreach (KeyValuePair<SubGoal,int> sg in sortedGoals){
-                    actionsQueue = planner.Plan(actions, sg.Key.subGoals, null); //error
+                    actionsQueue = planner.Plan(actions, sg.Key.subGoals, null);
                     if(actionsQueue != null){
                         currentGoal = sg.Key;
                         break;
@@ -79,7 +79,7 @@ namespace GoalDrivenBehaviour{
                         currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
                     }
 
-                    if(currentAction.targetTag != null){
+                    if(currentAction.target != null){
                         currentAction.running = true;
                         currentAction.agent.SetDestination(currentAction.target.transform.position);
                     }

@@ -15,11 +15,17 @@ TagManager:
   - cop
   - goal
   - agent
+  - Lounge
+  - WaitingArea
+  - Home
+  - Door
+  - Cubicle
+  - Reception
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 
