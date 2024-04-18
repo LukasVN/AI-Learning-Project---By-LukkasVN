@@ -1,60 +1,64 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace GoalDrivenBehaviour{
-
     public abstract class GAction : MonoBehaviour
     {
         public string actionName = "Action";
-        public float actionCost = 1.0f;
+        public float cost = 1.0f;
         public GameObject target;
         public string targetTag;
         public float duration = 0;
-        public WorldState[] ws_preConditions;
-        public WorldState[] ws_afterEffects;
+        public WorldState[] preConditions;
+        public WorldState[] afterEffects;
         public NavMeshAgent agent;
 
         public Dictionary<string, int> preconditions;
-        public Dictionary<string, int> aftereffects;
+        public Dictionary<string, int> effects;
 
         public WorldStates agentBeliefs;
 
         public bool running = false;
 
-        public GAction(){
+        public GAction()
+        {
             preconditions = new Dictionary<string, int>();
-            aftereffects = new Dictionary<string, int>();
+            effects = new Dictionary<string, int>();
         }
 
-        private void Awake() {
-            agent = gameObject.GetComponent<NavMeshAgent>();
+        public void Awake()
+        {
+            agent = this.gameObject.GetComponent<NavMeshAgent>();
 
-            if(ws_preConditions != null){
-                foreach (WorldState ws in ws_preConditions){
-                    preconditions.Add(ws.key, ws.value);
+            if (preConditions != null)
+                foreach (WorldState w in preConditions)
+                {
+                    preconditions.Add(w.key, w.value);
                 }
-            }
-            if(ws_afterEffects != null){
-                foreach (WorldState ws in ws_afterEffects){
-                    aftereffects.Add(ws.key, ws.value);
+
+            if (afterEffects != null)
+                foreach (WorldState w in afterEffects)
+                {
+                    effects.Add(w.key, w.value);
                 }
-            }
+                
         }
 
-        public bool IsAchivable(){
+        public bool IsAchievable()
+        {
             return true;
         }
 
-        public bool IsAchivableGiven(Dictionary<string, int> conditions){
-            foreach (KeyValuePair<string, int> pair in preconditions){
-                if(!conditions.ContainsKey(pair.Key)){
+        public bool IsAchievableGiven(Dictionary<string, int> conditions)
+        {
+            foreach (KeyValuePair<string, int> p in preconditions)
+            {
+                if (!conditions.ContainsKey(p.Key))
                     return false;
-                }
             }
             return true;
-
         }
 
         public abstract bool PrePerform();
