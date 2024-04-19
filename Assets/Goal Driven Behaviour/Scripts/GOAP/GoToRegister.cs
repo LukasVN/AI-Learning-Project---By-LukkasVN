@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using GoalDrivenBehaviour;
 using UnityEngine;
 
 namespace GoalDrivenBehaviour{
-
-    public class GoToWaitingRoom : GAction
+public class GoToRegister : GAction
     {
         public override bool PostPerform()
         {
@@ -17,6 +15,5 @@ namespace GoalDrivenBehaviour{
             return true;
         }
 
-        
     }
 }
