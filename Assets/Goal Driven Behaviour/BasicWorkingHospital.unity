@@ -5436,6 +5436,7 @@ GameObject:
   - component: {fileID: 177407083000933090}
   - component: {fileID: 1297786703}
   - component: {fileID: 2618188072736669893}
+  - component: {fileID: 2618188072736669895}
   - component: {fileID: 2618188072736669894}
   m_Layer: 0
   m_Name: Nurse
@@ -5467,7 +5468,7 @@ MonoBehaviour:
   - key: FreeCubicle
     value: 0
   afterEffects:
-  - key: treatPatient
+  - key: PatientChosen
     value: 0
   agent: {fileID: 0}
   running: 0
@@ -5485,6 +5486,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: []
   currentAction: {fileID: 0}
+--- !u!114 &2618188072736669895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618188072736669892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c320b1e2a08ff141ad02d701be50d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoToCubicle
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - key: PatientChosen
+    value: 0
+  afterEffects:
+  - key: treatPatient
+    value: 0
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &2629889910744717521
 GameObject:
   m_ObjectHideFlags: 0
