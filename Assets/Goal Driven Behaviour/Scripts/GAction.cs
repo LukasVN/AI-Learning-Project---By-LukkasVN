@@ -20,7 +20,7 @@ namespace GoalDrivenBehaviour{
         public Dictionary<string, int> preconditions;
         public Dictionary<string, int> effects;
 
-        public WorldStates agentBeliefs;
+        public WorldStates beliefs;
 
         public bool running = false;
 
@@ -47,6 +47,7 @@ namespace GoalDrivenBehaviour{
                 }
 
             inventory = GetComponent<GAgent>().inventory; 
+            beliefs = GetComponent<GAgent>().beliefs;
         }
 
         public bool IsAchievable()

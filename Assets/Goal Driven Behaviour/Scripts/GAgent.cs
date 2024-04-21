@@ -29,7 +29,6 @@ public class GAgent : MonoBehaviour
     public GAction currentAction;
     SubGoal currentGoal;
 
-    // Start is called before the first frame update
     protected virtual void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
@@ -71,7 +70,7 @@ public class GAgent : MonoBehaviour
 
             foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
             {
-                actionQueue = planner.plan(actions, sg.Key.sgoals, null);
+                actionQueue = planner.plan(actions, sg.Key.sgoals, beliefs);
                 if (actionQueue != null)
                 {
                     currentGoal = sg.Key;

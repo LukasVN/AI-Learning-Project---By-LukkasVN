@@ -13,8 +13,9 @@ namespace GoalDrivenBehaviour{
         }
         public override bool PostPerform()
         {
-            GWorld.Instance.GetWorld().ModifyState("PatientWaiting",1);
+            GWorld.Instance.GetWorld().ModifyState("isWaiting",1);
             GWorld.Instance.AddPatient(gameObject);
+            beliefs.ModifyState("atHospital", 1);
             return true;
         }
         
