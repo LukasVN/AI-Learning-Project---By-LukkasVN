@@ -15,6 +15,8 @@ namespace GoalDrivenBehaviour{
         public WorldState[] afterEffects;
         public NavMeshAgent agent;
 
+        public GInventory inventory;
+
         public Dictionary<string, int> preconditions;
         public Dictionary<string, int> effects;
 
@@ -30,7 +32,7 @@ namespace GoalDrivenBehaviour{
 
         public void Awake()
         {
-            agent = this.gameObject.GetComponent<NavMeshAgent>();
+            agent = gameObject.GetComponent<NavMeshAgent>();
 
             if (preConditions != null)
                 foreach (WorldState w in preConditions)
@@ -43,7 +45,8 @@ namespace GoalDrivenBehaviour{
                 {
                     effects.Add(w.key, w.value);
                 }
-                
+
+            inventory = GetComponent<GAgent>().inventory; 
         }
 
         public bool IsAchievable()
