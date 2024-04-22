@@ -11,18 +11,17 @@ namespace BehaviourTrees
         public int childIndex = 0;
         public string name;
 
-        public Node(){ }
+        public Node(){ 
+            
+        }
         public Node(string n){
-
+            name = n;
         }
 
         public void AddChild(Node n){
             children.Add(n);
         }
 
-        // public void RemoveChild(Node n){
-        //     children.Remove(n);
-        // }
     }
 }
 
