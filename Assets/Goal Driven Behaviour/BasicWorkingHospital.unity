@@ -369,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &425493464
 Transform:
   m_ObjectHideFlags: 0
@@ -4803,8 +4803,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7897220021019206081, guid: 297d1a60c7b633a4b95826601ca5e877, type: 3}
-      propertyPath: preConditions.Array.data[0].key
-      value: atHospital
+      propertyPath: duration
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
