@@ -1,22 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using GoalDrivenBehaviour;
 using UnityEngine;
 
 namespace GoalDrivenBehaviour{
 
-    public class GoToWaitingRoom : GAction
+    public class GoHome : GAction
     {
-        public override bool PostPerform()
-        {
+        public override bool PrePerform(){
             return true;
         }
-
-        public override bool PrePerform()
-        {
+        public override bool PostPerform(){
             return true;
-        }
-
+        }        
         
     }
 }
