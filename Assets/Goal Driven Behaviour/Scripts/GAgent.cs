@@ -32,8 +32,9 @@ public class GAgent : MonoBehaviour
     protected virtual void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
-        foreach (GAction a in acts)
+        foreach (GAction a in acts){
             actions.Add(a);
+        }
     }
 
 

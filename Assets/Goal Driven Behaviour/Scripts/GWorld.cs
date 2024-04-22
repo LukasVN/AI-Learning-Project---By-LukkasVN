@@ -24,6 +24,8 @@ namespace GoalDrivenBehaviour{
             if(cubes.Length > 0){
                 world.ModifyState("FreeCubicle", cubes.Length);
             }
+
+            Time.timeScale = 5; //Test
         }
 
         private GWorld()
