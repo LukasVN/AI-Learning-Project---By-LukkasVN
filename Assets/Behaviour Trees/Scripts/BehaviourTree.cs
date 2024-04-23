@@ -16,6 +16,7 @@ namespace BehaviourTrees
 
         public override Status Process()
         {
+            Debug.Log("[Tree] Running "+name+" Process");
             return children[childIndex].Process();
         }
 

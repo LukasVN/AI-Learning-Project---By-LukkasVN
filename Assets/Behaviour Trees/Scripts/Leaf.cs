@@ -20,6 +20,7 @@ namespace BehaviourTrees
 
         public override Status Process()
         {
+            Debug.Log("[Leaf] Running "+name+" Process");
             if(ProcessMethod != null){
                 return ProcessMethod();
             }

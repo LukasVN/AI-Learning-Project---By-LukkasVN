@@ -11,30 +11,39 @@ namespace BehaviourTrees
         private BehaviourTree tree;
         public GameObject diamond;
         public GameObject van;
+        public GameObject backDoor;
         private NavMeshAgent agent;
 
         public enum ActionState {IDLE, WORKING};
         private ActionState state = ActionState.IDLE;
 
+        Node.Status treeStatus = Node.Status.RUNNING;
+
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             tree = new BehaviourTree();
-            Node steal = new Node("Steal something");
+            Sequence steal = new Sequence("Steal something");
+            Leaf goToDoor = new Leaf("Go To Door", GoToDoor);
             Leaf goToDiamond = new Leaf("Go To Diamond", GoToDiamond);
             Leaf goToVan = new Leaf("Go To Van", GoToVan);
+            steal.AddChild(goToDoor);
             steal.AddChild(goToDiamond);
+            steal.AddChild(goToDoor);
             steal.AddChild(goToVan);
             tree.AddChild(steal);
 
             tree.PrintTree();
 
-            tree.Process();
 
         }
 
         public Node.Status GoToDiamond(){
             return GoToLocation(diamond.transform.position);
+        }
+
+        public Node.Status GoToDoor(){
+            return GoToLocation(backDoor.transform.position);
         }
 
         public Node.Status GoToVan(){
@@ -59,9 +68,11 @@ namespace BehaviourTrees
             
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            
+            if(treeStatus == Node.Status.RUNNING){
+                treeStatus = tree.Process();
+            }
         }
     }
 }
