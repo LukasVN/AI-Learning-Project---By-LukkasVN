@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotate : MonoBehaviour
+
+namespace BehaviourTrees
 {
-    // Update is called once per frame
-    void Update()
+    public class Rotate : MonoBehaviour
     {
-        this.transform.Rotate(0, 2, 0);
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            transform.Rotate(0, 2, 0);
+        }
     }
 }

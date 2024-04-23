@@ -14,6 +14,12 @@ namespace BehaviourTrees
             name = n;
         }
 
+        public override Status Process()
+        {
+            return children[childIndex].Process();
+        }
+
+
         struct NodeLevel{
             public int level;
             public Node node;

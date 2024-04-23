@@ -18,6 +18,10 @@ namespace BehaviourTrees
             name = n;
         }
 
+        public virtual Status Process(){
+            return children[childIndex].Process();
+        }
+
         public void AddChild(Node n){
             children.Add(n);
         }
