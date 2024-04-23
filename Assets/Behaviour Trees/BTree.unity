@@ -2161,10 +2161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bacbbdad5518b34b9df8c09d513730b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diamond: {fileID: 1550492363}
+  diamondHolder: {fileID: 1550492363}
   van: {fileID: 570002155}
   frontDoor: {fileID: 1791870521}
   backDoor: {fileID: 919599686}
+  money: 204
 --- !u!1 &716268924
 GameObject:
   m_ObjectHideFlags: 0

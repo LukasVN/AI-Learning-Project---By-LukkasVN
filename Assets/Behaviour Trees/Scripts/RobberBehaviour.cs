@@ -9,7 +9,7 @@ namespace BehaviourTrees
     public class RobberBehaviour : MonoBehaviour
     {
         private BehaviourTree tree;
-        public GameObject diamond;
+        public GameObject diamondHolder;
         public GameObject van;
         public GameObject frontDoor;
         public GameObject backDoor;
@@ -19,20 +19,26 @@ namespace BehaviourTrees
 
         Node.Status treeStatus = Node.Status.RUNNING;
 
+        [Range(0,1000)]
+        public int money = 800;
+
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             tree = new BehaviourTree();
             Sequence steal = new Sequence("Steal something");
+            Leaf hasEnoughMoney = new Leaf("Has Enough Money", CheckMoney);
             Leaf goToFrontDoor = new Leaf("Go To Front Door", GoToFrontDoor);
             Leaf goToBackDoor = new Leaf("Go To Back Door", GoToBackDoor);
             Leaf goToDiamond = new Leaf("Go To Diamond", GoToDiamond);
             Leaf goToVan = new Leaf("Go To Van", GoToVan);
             Selector openDoor = new Selector("Open Door");
 
+
             openDoor.AddChild(goToFrontDoor);
             openDoor.AddChild(goToBackDoor);
 
+            steal.AddChild(hasEnoughMoney);
             steal.AddChild(openDoor);
             steal.AddChild(goToDiamond);
             // steal.AddChild(goToBackDoor);
@@ -44,8 +50,15 @@ namespace BehaviourTrees
 
         }
 
+        public Node.Status CheckMoney(){
+            if(money >= 500){
+                return Node.Status.FAILURE;
+            }
+            return Node.Status.SUCCESS;
+        }
+
         public Node.Status GoToDiamond(){
-            return StealDiamond(diamond);
+            return StealDiamond(diamondHolder);
         }
         
         public Node.Status GoToFrontDoor(){
@@ -58,7 +71,16 @@ namespace BehaviourTrees
 
 
         public Node.Status GoToVan(){
-            return EscapeInVan(van);
+            return FinishedStealing(van);
+        }
+
+        public Node.Status FinishedStealing(GameObject van){
+            Node.Status s = GoToLocation(van.transform.position);
+            if(s == Node.Status.SUCCESS){
+                transform.GetChild(1).gameObject.SetActive(false);
+                money += 300;
+            }
+            return s;
         }
 
         public Node.Status EscapeInVan(GameObject van){
@@ -66,15 +88,14 @@ namespace BehaviourTrees
             if(s == Node.Status.SUCCESS){
                 van.SetActive(false);
                 gameObject.SetActive(false);
-                return Node.Status.SUCCESS;
             }
             return s;
         }
 
-        public Node.Status StealDiamond(GameObject diamond){
-            Node.Status s = GoToLocation(diamond.transform.position);
+        public Node.Status StealDiamond(GameObject diamondHolder){
+            Node.Status s = GoToLocation(diamondHolder.transform.position);
             if(s == Node.Status.SUCCESS){
-                diamond.transform.GetChild(0).parent = gameObject.transform;
+                diamondHolder.transform.GetChild(0).parent = gameObject.transform;
                 return Node.Status.SUCCESS;
             }
             return s;
@@ -114,7 +135,7 @@ namespace BehaviourTrees
 
         void FixedUpdate()
         {
-            if(treeStatus == Node.Status.RUNNING){
+            if(treeStatus != Node.Status.SUCCESS){
                 treeStatus = tree.Process();
             }
         }
