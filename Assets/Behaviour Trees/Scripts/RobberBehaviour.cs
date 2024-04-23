@@ -11,9 +11,9 @@ namespace BehaviourTrees
         private BehaviourTree tree;
         public GameObject diamond;
         public GameObject van;
+        public GameObject frontDoor;
         public GameObject backDoor;
         private NavMeshAgent agent;
-
         public enum ActionState {IDLE, WORKING};
         private ActionState state = ActionState.IDLE;
 
@@ -24,12 +24,18 @@ namespace BehaviourTrees
             agent = GetComponent<NavMeshAgent>();
             tree = new BehaviourTree();
             Sequence steal = new Sequence("Steal something");
-            Leaf goToDoor = new Leaf("Go To Door", GoToDoor);
+            Leaf goToFrontDoor = new Leaf("Go To Front Door", GoToFrontDoor);
+            Leaf goToBackDoor = new Leaf("Go To Back Door", GoToBackDoor);
             Leaf goToDiamond = new Leaf("Go To Diamond", GoToDiamond);
             Leaf goToVan = new Leaf("Go To Van", GoToVan);
-            steal.AddChild(goToDoor);
+            Selector openDoor = new Selector("Open Door");
+
+            openDoor.AddChild(goToFrontDoor);
+            openDoor.AddChild(goToBackDoor);
+
+            steal.AddChild(openDoor);
             steal.AddChild(goToDiamond);
-            steal.AddChild(goToDoor);
+            // steal.AddChild(goToBackDoor);
             steal.AddChild(goToVan);
             tree.AddChild(steal);
 
@@ -41,10 +47,15 @@ namespace BehaviourTrees
         public Node.Status GoToDiamond(){
             return GoToLocation(diamond.transform.position);
         }
+        
+        public Node.Status GoToFrontDoor(){
+            return GoToLocation(frontDoor.transform.position);
+        }
 
-        public Node.Status GoToDoor(){
+        public Node.Status GoToBackDoor(){
             return GoToLocation(backDoor.transform.position);
         }
+
 
         public Node.Status GoToVan(){
             return GoToLocation(van.transform.position);
