@@ -45,20 +45,53 @@ namespace BehaviourTrees
         }
 
         public Node.Status GoToDiamond(){
-            return GoToLocation(diamond.transform.position);
+            return StealDiamond(diamond);
         }
         
         public Node.Status GoToFrontDoor(){
-            return GoToLocation(frontDoor.transform.position);
+            return GoToDoor(frontDoor);
         }
 
         public Node.Status GoToBackDoor(){
-            return GoToLocation(backDoor.transform.position);
+            return GoToDoor(backDoor);
         }
 
 
         public Node.Status GoToVan(){
-            return GoToLocation(van.transform.position);
+            return EscapeInVan(van);
+        }
+
+        public Node.Status EscapeInVan(GameObject van){
+            Node.Status s = GoToLocation(van.transform.position);
+            if(s == Node.Status.SUCCESS){
+                van.SetActive(false);
+                gameObject.SetActive(false);
+                return Node.Status.SUCCESS;
+            }
+            return s;
+        }
+
+        public Node.Status StealDiamond(GameObject diamond){
+            Node.Status s = GoToLocation(diamond.transform.position);
+            if(s == Node.Status.SUCCESS){
+                diamond.transform.GetChild(0).parent = gameObject.transform;
+                return Node.Status.SUCCESS;
+            }
+            return s;
+        }
+
+        public Node.Status GoToDoor(GameObject door){
+            Node.Status s = GoToLocation(door.transform.position);
+            if(s == Node.Status.SUCCESS){
+                if(!door.GetComponent<Lock>().isLocked){
+                    door.SetActive(false);
+                    return Node.Status.SUCCESS;
+                }
+                return Node.Status.FAILURE;
+            }
+            else{
+                return s;
+            }
         }
 
         public Node.Status GoToLocation(Vector3 destination){
