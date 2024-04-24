@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecondsUpdate : MonoBehaviour
-{
-    float speed = 0.5f;
-    float timeStartOffset = 0;
-    bool gotStartTime = false;
-    void Update()
+namespace PhysicsOfAI{
+    public class SecondsUpdate : MonoBehaviour
     {
-        if(!gotStartTime){
-            timeStartOffset = Time.realtimeSinceStartup;
-            gotStartTime = true;
-        }
-        transform.position = new Vector3(transform.position.x,
-                                        transform.position.y,
-                                        Time.realtimeSinceStartup - timeStartOffset * speed);
+        float speed = 0.5f;
+        float timeStartOffset = 0;
+        bool gotStartTime = false;
+        void Update()
+        {
+            if(!gotStartTime){
+                timeStartOffset = Time.realtimeSinceStartup;
+                gotStartTime = true;
+            }
+            transform.position = new Vector3(transform.position.x,
+                                            transform.position.y,
+                                            Time.realtimeSinceStartup - timeStartOffset * speed);
 
-        ;
+            ;
+        }
     }
 }

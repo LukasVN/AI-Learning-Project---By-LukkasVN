@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyShell : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+namespace PhysicsOfAI{
+    public class DestroyShell : MonoBehaviour
     {
-        Destroy(gameObject, 3.5f);  
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            Destroy(gameObject, 3.5f);  
+        }
 
+    }
 }

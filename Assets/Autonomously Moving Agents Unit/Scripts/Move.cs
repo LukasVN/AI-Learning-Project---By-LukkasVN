@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PhysicsOfAI{
-    public class Drive : MonoBehaviour
+namespace AutonomouslyMovingAgents{
+    public class Move : MonoBehaviour
     {
         public float speed = 10.0f;
         public float rotationSpeed = 100.0f;
-        public Transform tankGun;
-        public Transform bulletSpawn;
-        public GameObject bullet;
-        
+        public float currentSpeed = 0;
 
         void Update()
         {
@@ -26,17 +23,10 @@ namespace PhysicsOfAI{
 
             // Move translation along the object's z-axis
             transform.Translate(0, 0, translation);
+            currentSpeed = translation;
 
             // Rotate around our y-axis
             transform.Rotate(0, rotation, 0);
-
-            if(Input.GetKey(KeyCode.T)){
-                tankGun.RotateAround(tankGun.position, tankGun.right,-50 * Time.deltaTime);
-            } else if(Input.GetKey(KeyCode.G)){
-                tankGun.RotateAround(tankGun.position, tankGun.right,50 * Time.deltaTime);
-            } else if(Input.GetKeyDown(KeyCode.P)){
-                Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-            }
         }
     }
 }

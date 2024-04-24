@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveShell : MonoBehaviour {
+namespace PhysicsOfAI{
+    public class MoveShell : MonoBehaviour {
 
-    public float speed = 1.0f;
+        public float speed = 1.0f;
 
 
-    void Update() {
+        void Update() {
 
-        transform.Translate(0.0f, 0.0f, Time.deltaTime * speed);
+            transform.Translate(0.0f, 0.0f, Time.deltaTime * speed);
+        }
     }
 }

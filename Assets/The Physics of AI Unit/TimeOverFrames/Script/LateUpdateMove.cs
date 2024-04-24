@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateUpdateMove : MonoBehaviour
-{
-    float speed = 0.5f;
-    void LateUpdate()
+namespace PhysicsOfAI{
+    public class LateUpdateMove : MonoBehaviour
     {
-        transform.Translate(0,0, Time.deltaTime * speed);
+        float speed = 0.5f;
+        void LateUpdate()
+        {
+            transform.Translate(0,0, Time.deltaTime * speed);
+        }
     }
 }

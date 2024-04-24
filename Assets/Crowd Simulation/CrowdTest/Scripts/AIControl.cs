@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIControl : MonoBehaviour
+namespace CrowdSimulation
 {
-    public Transform goal;
-    private NavMeshAgent agent;
-    void Start()
+    public class AIControl : MonoBehaviour
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(goal.position);
-    }
+        public Transform goal;
+        private NavMeshAgent agent;
+        void Start()
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.SetDestination(goal.position);
+        }
 
-    void Update()
-    {
-        
+        void Update()
+        {
+            
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace MathsofAI{
 public class FarmerMovement : MonoBehaviour
 {
     public float speed = 10.0f;
@@ -25,4 +26,5 @@ public class FarmerMovement : MonoBehaviour
         // Rotate around our y-axis
         transform.Rotate(0, rotation, 0);
     }
+}
 }
